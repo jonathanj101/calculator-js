@@ -4,6 +4,8 @@ Simple HTML/CSS/JavaScript
 
 # Summary
 
+under construction!!
+
 **Jonathan Jimenez** - Aspiring Full Stack SoftWare Developer
 
 - [LinkedIn](https://www.linkedin.com/in/jonathan-jimenez101/)
