@@ -6,7 +6,7 @@ Simple HTML/CSS/JavaScript
 
 under construction!!
 
-**Jonathan Jimenez** - Aspiring Full Stack SoftWare Developer
+**Jonathan Jimenez** - Aspiring Full Stack Software Developer
 
 - [LinkedIn](https://www.linkedin.com/in/jonathan-jimenez101/)
 - [Codepen](https://codepen.io/jonathanj101/)
