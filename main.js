@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 const result = document.querySelector("#result")
-const prevResult = document.querySelector("#top-result")
+let prevResult = document.querySelector("#top-result")
 const operators = document.querySelectorAll("#operator")
 const insertBtns = document.querySelectorAll("#num")
 const divBtns = document.querySelectorAll('div.btns')
 
-
-let number;
-let number2
+let number
+let firstValue;
+let secondValue;
 let operator;
 
 function display() {
@@ -18,7 +18,8 @@ function display() {
         btns.addEventListener('click', btn => {
 
             number = btn.target.value
-
+            firstValue = number
+            console.log(firstValue, secondValue)
             if (number.includes('.') && result.value.includes('.')) return;
             result.value += number
         })
@@ -41,9 +42,25 @@ function calculate() {
                     break;
 
                 case '+':
-                    if (operator.includes("+") && result.value.includes("+")) return;
-                    result.value += operator
+                    // result.value += operator
+                    // secondValue += result.value
+                    // console.log(`${secondValue}, ${result.value}`)
+                    if (result.value.includes("+")) return;
+                    // debugger;
+                    prevResult.value = result.value
+                    result.value = ''
+                    result.value = '+'
 
+                    console.log(number)
+
+                    // debugger;
+                    // result.value += operator
+                    secondValue = result.value
+                    // prevResult.value = result.value
+                    // debugger;
+                    console.log(result.value, firstValue, secondValue)
+
+                    addition(firstValue, secondValue)
                     break;
 
                 case '-':
@@ -66,6 +83,7 @@ function calculate() {
         })
     })
 }
+console.log(firstValue, secondValue)
 
 function clear(str) {
     str.value = "0"
