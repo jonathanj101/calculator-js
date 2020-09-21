@@ -46,51 +46,55 @@ function calculate() {
             operator = oper.target.value
             switch (operator) {
                 case '+':
-                    if (prevResult.value === "") {
-                        prevResult.value += `${parseFloat(result.value)} + `
-                        result.value = ''
-                    } else {
+                    if (prevResult.value !== "") {
                         firstNum = prevResult.value
                         secondNum = result.value
-                        prevResult.value = `${secondNum} + ${parseFloat(result.value)}`
+                        prevResult.value = `${firstNum} + ${parseFloat(result.value)}`
                         if (prevResult.value === NaN) return;
+                        prevResult.value = ''
+                        result.value = ''
+                    } else {
+                        prevResult.value += `${parseFloat(result.value)} + `
                         result.value = ''
                     }
                     break;
                 case '-':
-                    if (prevResult.value === "") {
-                        prevResult.value += `${parseFloat(result.value)} - `
-                        result.value = ''
-                    } else {
+                    if (prevResult.value !== "") {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = `${firstNum} - ${parseFloat(result.value)}`
-                        result.value = ''
                         if (prevResult.value === NaN) return;
+                        prevResult.value = ''
+                        result.value = ''
+                    } else {
+                        prevResult.value += `${parseFloat(result.value)} - `
+                        result.value = ''
                     }
                     break;
                 case '*':
-                    if (prevResult.value === "") {
-                        prevResult.value += `${parseFloat(result.value)} * `
-                        result.value = ''
-                    } else {
+                    if (prevResult.value !== "") {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = ` ${firstNum} * ${parseFloat(result.value)}`
-                        result.value = ''
                         if (prevResult.value === NaN) return;
+                        prevResult.value = ''
+                        result.value = ''
+                    } else {
+                        prevResult.value += `${parseFloat(result.value)} * `
+                        result.value = ''
                     }
                     break;
                 case "/":
-                    if (prevResult.value === "") {
-                        prevResult.value += `${parseFloat(result.value)} / `
-                        result.value = ''
-                    } else {
+                    if (prevResult.value !== "") {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = `${firstNum} / ${parseFloat(result.value)}`
-                        result.value = ''
                         if (prevResult.value === NaN) return;
+                        prevResult.value = ''
+                        result.value = ''
+                    } else {
+                        prevResult.value += `${parseFloat(result.value)} / `
+                        result.value = ''
                     }
                     break;
                 default:
