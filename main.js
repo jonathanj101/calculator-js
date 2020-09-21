@@ -103,7 +103,6 @@ function calculate() {
         })
     })
     const equalOperator = document.getElementById("equal-operator")
-
     equalOperator.addEventListener('click', () => {
         debugger;
         if (result.value !== '') {
@@ -156,7 +155,6 @@ function devide(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
     let total = (num / num2)
-    console.log("devide")
     prevResult.value = total
     result.value = ''
     if (!prevResult.value) {
@@ -170,8 +168,6 @@ function substract(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
     let total = num - num2
-    console.log(num, num2, total)
-    console.log("substract")
     prevResult.value = total
     result.value = ''
     if (!prevResult.value) {
