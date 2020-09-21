@@ -4,122 +4,176 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const result = document.querySelector("#result")
 let prevResult = document.querySelector("#top-result")
-const operators = document.querySelectorAll("#operator")
-const insertBtns = document.querySelectorAll("#num")
-const divBtns = document.querySelectorAll('div.btns')
 
-let number
-let firstValue;
-let secondValue;
+let number;
 let operator;
+let firstNum;
+let secondNum;
 
 function display() {
-    insertBtns.forEach(btns => {
+    const clear = document.getElementById("clear")
+    const backspaceBtn = document.getElementById('backspace')
+    const numberBtn = document.querySelectorAll("#number")
+    numberBtn.forEach(btns => {
         btns.addEventListener('click', btn => {
-
             number = btn.target.value
-            firstValue = number
-            console.log(firstValue, secondValue)
+            firstNum = number
             if (number.includes('.') && result.value.includes('.')) return;
             result.value += number
         })
     })
+    clear.addEventListener('click', () => {
+        result.value = 0
+        prevResult.value = ''
+    })
+    backspaceBtn.addEventListener('click', () => {
+        result.value = result.value.substr(0, result.value.length - 1)
+        if (result.value === '') {
+            result.value = '0'
+            prevResult.value = prevResult.value.substr(0, prevResult.value.length - 1)
+            if (prevResult.value === '') {
+                prevResult.value = ''
+            }
+        }
+    })
     calculate()
 }
-
-
 function calculate() {
+    const operators = document.querySelectorAll("#operator")
     operators.forEach(operation => {
         operation.addEventListener('click', oper => {
+            debugger;
             operator = oper.target.value
             switch (operator) {
-                case "C":
-                    clear(result)
-                    break;
-
-                case '<':
-                    backspace(result)
-                    break;
-
                 case '+':
-                    // result.value += operator
-                    // secondValue += result.value
-                    // console.log(`${secondValue}, ${result.value}`)
-                    if (result.value.includes("+")) return;
-                    // debugger;
-                    prevResult.value = result.value
-                    result.value = ''
-                    result.value = '+'
-
-                    console.log(number)
-
-                    // debugger;
-                    // result.value += operator
-                    secondValue = result.value
-                    // prevResult.value = result.value
-                    // debugger;
-                    console.log(result.value, firstValue, secondValue)
-
-                    addition(firstValue, secondValue)
+                    if (prevResult.value === "") {
+                        prevResult.value += `${parseFloat(result.value)} + `
+                        result.value = ''
+                    } else {
+                        firstNum = prevResult.value
+                        secondNum = result.value
+                        prevResult.value = `${secondNum} + ${parseFloat(result.value)}`
+                        if (prevResult.value === NaN) return;
+                        result.value = ''
+                    }
                     break;
-
                 case '-':
-                    if (operator.includes("-") && result.value.includes("-")) return;
-                    result.value += operator
-
+                    if (prevResult.value === "") {
+                        prevResult.value += `${parseFloat(result.value)} - `
+                        result.value = ''
+                    } else {
+                        firstNum = prevResult.value
+                        secondNum = result.value
+                        prevResult.value = `${firstNum} - ${parseFloat(result.value)}`
+                        result.value = ''
+                        if (prevResult.value === NaN) return;
+                    }
+                    break;
                 case '*':
-                    if (operator.includes("*") && result.value.includes("*")) return;
-                    result.value += operator
+                    if (prevResult.value === "") {
+                        prevResult.value += `${parseFloat(result.value)} * `
+                        result.value = ''
+                    } else {
+                        firstNum = prevResult.value
+                        secondNum = result.value
+                        prevResult.value = ` ${firstNum} * ${parseFloat(result.value)}`
+                        result.value = ''
+                        if (prevResult.value === NaN) return;
+                    }
                     break;
-
                 case "/":
-                    if (operator.includes("/") && result.value.includes("/")) return;
-                    result.value += operator
+                    if (prevResult.value === "") {
+                        prevResult.value += `${parseFloat(result.value)} / `
+                        result.value = ''
+                    } else {
+                        firstNum = prevResult.value
+                        secondNum = result.value
+                        prevResult.value = `${firstNum} / ${parseFloat(result.value)}`
+                        result.value = ''
+                        if (prevResult.value === NaN) return;
+                    }
                     break;
-
                 default:
                     break;
             }
         })
     })
-}
-console.log(firstValue, secondValue)
+    const equalOperator = document.getElementById("equal-operator")
 
-function clear(str) {
-    str.value = "0"
+    equalOperator.addEventListener('click', () => {
+        debugger;
+        if (result.value !== '') {
+            firstNum = prevResult.value.slice('')
+            secondNum = result.value.slice('')
+        }
+        if (operator === '+') {
+            addition(firstNum, secondNum)
+        }
+        if (operator === '-') {
+            substract(firstNum, secondNum)
+        }
+        if (operator === '/') {
+            devide(firstNum, secondNum)
+        }
+        if (operator === '*') {
+            multiply(firstNum, secondNum)
+        }
+    })
 }
-
-function backspace(str) {
-    str.value = str.value.substr(0, str.value.length - 1)
-    if (str.value === '') {
-        result.value = 0
-    }
-}
-
 
 function addition(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
     let total = num + num2
-    console.log(num, num2, total)
-    console.log(typeof (num), typeof (num2), typeof (total))
-    return total
+    prevResult.value = total
+    result.value = ''
+    debugger;
+    if (!prevResult.value) {
+        prevResult.value = total + num2
+        result.value = ''
+    } else {
+        prevResult.value = num + num2
+    }
 }
-
 function multiply(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
-    return total = num * num2
+    let total = num * num2
+    prevResult.value = total
+    result.value = ''
+    if (!prevResult.value) {
+        prevResult.value = total * num2
+        result.value = ''
+    } else {
+        prevResult.value = num * num2
+    }
 }
-
 function devide(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
-    return total
+    let total = (num / num2)
+    console.log("devide")
+    prevResult.value = total
+    result.value = ''
+    if (!prevResult.value) {
+        prevResult.value = total / num2
+        result.value = ''
+    } else {
+        prevResult.value = num / num2
+    }
 }
-
 function substract(num, num2) {
     num = parseFloat(num)
     num2 = parseFloat(num2)
-    return total = num - num2
+    let total = num - num2
+    console.log(num, num2, total)
+    console.log("substract")
+    prevResult.value = total
+    result.value = ''
+    if (!prevResult.value) {
+        prevResult.value = total - num2
+        result.value = ''
+    } else {
+        prevResult.value = num - num2
+    }
 }
