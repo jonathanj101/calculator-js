@@ -51,11 +51,13 @@ function calculate() {
                         secondNum = result.value
                         prevResult.value = `${firstNum} + ${parseFloat(result.value)}`
                         if (prevResult.value === NaN) return;
-                        prevResult.value = ''
                         result.value = ''
                     } else {
                         prevResult.value += `${parseFloat(result.value)} + `
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = ''
+                        }
+                        result.value = '0'
                     }
                     break;
                 case '-':
@@ -64,11 +66,13 @@ function calculate() {
                         secondNum = result.value
                         prevResult.value = `${firstNum} - ${parseFloat(result.value)}`
                         if (prevResult.value === NaN) return;
-                        prevResult.value = ''
                         result.value = ''
                     } else {
                         prevResult.value += `${parseFloat(result.value)} - `
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = ''
+                        }
+                        result.value = '0'
                     }
                     break;
                 case '*':
@@ -77,10 +81,12 @@ function calculate() {
                         secondNum = result.value
                         prevResult.value = ` ${firstNum} * ${parseFloat(result.value)}`
                         if (prevResult.value === NaN) return;
-                        prevResult.value = ''
                         result.value = ''
                     } else {
                         prevResult.value += `${parseFloat(result.value)} * `
+                        if (prevResult.value.includes("NaN")) {
+                            prevResult.value = ''
+                        }
                         result.value = ''
                     }
                     break;
@@ -94,6 +100,9 @@ function calculate() {
                         result.value = ''
                     } else {
                         prevResult.value += `${parseFloat(result.value)} / `
+                        if (prevResult.value.includes("NaN")) {
+                            prevResult.value = ''
+                        }
                         result.value = ''
                     }
                     break;
