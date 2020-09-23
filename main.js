@@ -96,7 +96,6 @@ function calculate() {
                         secondNum = result.value
                         prevResult.value = `${firstNum} / ${parseFloat(result.value)}`
                         if (prevResult.value === NaN) return;
-                        prevResult.value = ''
                         result.value = ''
                     } else {
                         prevResult.value += `${parseFloat(result.value)} / `
