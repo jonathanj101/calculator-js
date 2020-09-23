@@ -7,8 +7,6 @@ let prevResult = document.querySelector("#top-result")
 
 let number;
 let operator;
-let firstNum;
-let secondNum;
 
 function display() {
     const clear = document.getElementById("clear")
@@ -17,7 +15,6 @@ function display() {
     numberBtn.forEach(btns => {
         btns.addEventListener('click', btn => {
             number = btn.target.value
-            firstNum = number
             if (number.includes('.') && result.value.includes('.')) return;
             result.value += number
         })
@@ -38,11 +35,14 @@ function display() {
     })
     calculate()
 }
+
+let firstNum;
+let secondNum;
+
 function calculate() {
     const operators = document.querySelectorAll("#operator")
     operators.forEach(operation => {
         operation.addEventListener('click', oper => {
-            debugger;
             operator = oper.target.value
             switch (operator) {
                 case '+':
@@ -57,7 +57,7 @@ function calculate() {
                         if (prevResult.value.includes('NaN')) {
                             prevResult.value = ''
                         }
-                        result.value = '0'
+                        result.value = ''
                     }
                     break;
                 case '-':
@@ -72,7 +72,7 @@ function calculate() {
                         if (prevResult.value.includes('NaN')) {
                             prevResult.value = ''
                         }
-                        result.value = '0'
+                        result.value = ''
                     }
                     break;
                 case '*':
@@ -105,32 +105,29 @@ function calculate() {
                         result.value = ''
                     }
                     break;
-                default:
-                    break;
             }
         })
     })
-    const equalOperator = document.getElementById("equal-operator")
-    equalOperator.addEventListener('click', () => {
-        debugger;
-        if (result.value !== '') {
-            firstNum = prevResult.value.slice('')
-            secondNum = result.value.slice('')
-        }
-        if (operator === '+') {
-            addition(firstNum, secondNum)
-        }
-        if (operator === '-') {
-            substract(firstNum, secondNum)
-        }
-        if (operator === '/') {
-            devide(firstNum, secondNum)
-        }
-        if (operator === '*') {
-            multiply(firstNum, secondNum)
-        }
-    })
 }
+const equalOperator = document.getElementById("equal-operator")
+equalOperator.addEventListener('click', () => {
+    if (result.value !== '') {
+        firstNum = prevResult.value.slice('')
+        secondNum = result.value.slice('')
+    }
+    if (operator === '+') {
+        addition(firstNum, secondNum)
+    }
+    if (operator === '-') {
+        substract(firstNum, secondNum)
+    }
+    if (operator === '/') {
+        devide(firstNum, secondNum)
+    }
+    if (operator === '*') {
+        multiply(firstNum, secondNum)
+    }
+})
 
 function addition(num, num2) {
     num = parseFloat(num)
@@ -138,7 +135,6 @@ function addition(num, num2) {
     let total = num + num2
     prevResult.value = total
     result.value = ''
-    debugger;
     if (!prevResult.value) {
         prevResult.value = total + num2
         result.value = ''
