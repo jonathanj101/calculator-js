@@ -20,13 +20,13 @@ function display() {
         })
     })
     clear.addEventListener('click', () => {
-        result.value = 0
+        result.value = ''
         prevResult.value = ''
     })
     backspaceBtn.addEventListener('click', () => {
         result.value = result.value.substr(0, result.value.length - 1)
         if (result.value === '') {
-            result.value = '0'
+            result.value = ''
             prevResult.value = prevResult.value.substr(0, prevResult.value.length - 1)
             if (prevResult.value === '') {
                 prevResult.value = ''
@@ -44,14 +44,16 @@ function calculate() {
     operators.forEach(operation => {
         operation.addEventListener('click', oper => {
             operator = oper.target.value
+            debugger;
             switch (operator) {
                 case '+':
                     if (prevResult.value !== "") {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = `${firstNum} + ${parseFloat(result.value)}`
-                        if (prevResult.value === NaN) return;
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = `${firstNum} ${operator}`
+                        }
                     } else {
                         prevResult.value += `${parseFloat(result.value)} + `
                         if (prevResult.value.includes('NaN')) {
@@ -65,8 +67,9 @@ function calculate() {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = `${firstNum} - ${parseFloat(result.value)}`
-                        if (prevResult.value === NaN) return;
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = `${firstNum} ${operator}`
+                        }
                     } else {
                         prevResult.value += `${parseFloat(result.value)} - `
                         if (prevResult.value.includes('NaN')) {
@@ -80,8 +83,9 @@ function calculate() {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = ` ${firstNum} * ${parseFloat(result.value)}`
-                        if (prevResult.value === NaN) return;
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = `${firstNum} ${operator}`
+                        }
                     } else {
                         prevResult.value += `${parseFloat(result.value)} * `
                         if (prevResult.value.includes("NaN")) {
@@ -95,8 +99,9 @@ function calculate() {
                         firstNum = prevResult.value
                         secondNum = result.value
                         prevResult.value = `${firstNum} / ${parseFloat(result.value)}`
-                        if (prevResult.value === NaN) return;
-                        result.value = ''
+                        if (prevResult.value.includes('NaN')) {
+                            prevResult.value = `${firstNum} ${operator}`
+                        }
                     } else {
                         prevResult.value += `${parseFloat(result.value)} / `
                         if (prevResult.value.includes("NaN")) {
@@ -135,6 +140,8 @@ function addition(num, num2) {
     let total = num + num2
     prevResult.value = total
     result.value = ''
+
+    debugger;
     if (!prevResult.value) {
         prevResult.value = total + num2
         result.value = ''
@@ -148,6 +155,7 @@ function multiply(num, num2) {
     let total = num * num2
     prevResult.value = total
     result.value = ''
+    debugger;
     if (!prevResult.value) {
         prevResult.value = total * num2
         result.value = ''
@@ -164,6 +172,7 @@ function devide(num, num2) {
     if (!prevResult.value) {
         prevResult.value = total / num2
         result.value = ''
+        debugger;
     } else {
         prevResult.value = num / num2
     }
@@ -174,6 +183,7 @@ function substract(num, num2) {
     let total = num - num2
     prevResult.value = total
     result.value = ''
+    debugger;
     if (!prevResult.value) {
         prevResult.value = total - num2
         result.value = ''
