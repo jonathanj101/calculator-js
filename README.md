@@ -1,4 +1,4 @@
-# calculator-js
+# Vanilla JS Calculator
 
 Simple Calculator built on pure Vanilla JS/ HTML & CSS
 
