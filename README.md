@@ -14,4 +14,4 @@ I wanted to re-create one of my project, which is the Calculator App but without
 
 # Author
 
-**Jonathan Jimenez** - Full Stack Software Developer - [LinkedIn](https://www.linkedin.com/in/jonathan-jimenez101/) | [Website](https://jonathan-jimenez.herokuapp.com/)
+**Jonathan Jimenez** - Full Stack Software Developer - [LinkedIn](https://www.linkedin.com/in/jonathan-jimenez101/) | [Website](https://www.jonathanjimenez.tech/)
